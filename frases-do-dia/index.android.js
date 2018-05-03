@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, AppRegistry, Image, Button } from 'react-native';
+import { View, AppRegistry, Image, Button, Alert } from 'react-native';
 
 const styles = {
   container: {
@@ -25,7 +25,7 @@ const fraseDoDia = function () {
 
   let index = Math.round( Math.random() * 10 );
 
-  return alert(frases[index])
+  return Alert.alert(frases[index]);
 }
 
 export default class frases_do_dia extends Component {
