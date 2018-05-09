@@ -3,9 +3,11 @@ import {
   StyleSheet,
   Text,
   Button,
-  Image,
   View
 } from 'react-native';
+
+import Topo from './src/components/topo';
+import Icone from './src/components/icone';
 
 export default class App extends Component {
 
@@ -83,46 +85,6 @@ export default class App extends Component {
           <Icone choose={this.state.escolhaUsuario} player='User' />
           <Icone choose={this.state.escolhaComputador} player='Computer' />
         </View>
-      </View>
-    );
-  }
-}
-
-class Icone extends Component {
-
-  render() {
-    if (this.props.choose === 'pedra') {
-      return (
-        <View>
-          <Text>{this.props.player}</Text>
-          <Image source={require('./img/pedra.png')} />
-        </View>
-      );
-    } else if (this.props.choose === 'papel') {
-      return (
-        <View>
-          <Text>{this.props.player}</Text>
-          <Image source={require('./img/papel.png')} />
-        </View>
-      );
-    } else if (this.props.choose === 'tesoura') {
-      return (
-        <View>
-          <Text>{this.props.player}</Text>
-          <Image source={require('./img/tesoura.png')} />
-        </View>
-      );
-    } else {
-      return false;
-    }
-  }
-}
-
-class Topo extends Component {
-  render() {
-    return (
-      <View>
-        <Image source={require('./img/jokenpo.png')} />
       </View>
     );
   }
