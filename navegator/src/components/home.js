@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 
+import LogoTitle from "./LogoTitle";
+
 export default class HomeScreen extends Component {
-  static navigationOptions = {
-    title: 'Home',
+  static navigationOptions = ({ navigation }) => {
+    const params = navigation.state.params || {};
+
+    return {
+      headerLeft: (
+        <Button
+          onPress={() => navigation.navigate('MyModal')}
+          title="Info"
+          color="#ccc"
+        />
+      ),
+      /* the rest of this config is unchanged */
+    };
   };
   
   render() {
@@ -15,7 +28,7 @@ export default class HomeScreen extends Component {
           onPress={() => {
             this.props.navigation.navigate('Details', {
               itemId: {"prop1": "item 1", "prop2": "prop2"},
-              otherParam: 'anything you want here',
+              title: 'Screen Details',
             });
           }}
         />

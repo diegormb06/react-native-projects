@@ -3,8 +3,16 @@ import { View, Text, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 export default class DetailsScreen extends Component {
-  static navigationOptions = {
-    title: 'Details',
+  static navigationOptions = ({ navigation, navigationOptions }) => {
+    const { params } = navigation.state;
+
+    return {
+      title: params ? params.title : 'A Nested Details Screen',
+      headerStyle: {
+        backgroundColor: navigationOptions.headerTintColor,
+      },
+      headerTintColor: navigationOptions.headerStyle.backgroundColor,
+    };
   };
   
   render() {
@@ -31,6 +39,10 @@ export default class DetailsScreen extends Component {
         <Button
           title="Go back"
           onPress={() => this.props.navigation.goBack()}
+        />
+        <Button
+          title="Update the title"
+          onPress={() => this.props.navigation.setParams({ title: 'Updated!' })}
         />
       </View>
     );

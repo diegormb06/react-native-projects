@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import axios from 'axios';
 import Item from './item';
@@ -8,12 +8,10 @@ export default class ListaItems extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = { listaItens: [] };
   }
 
   componentWillMount() {
-    // faus.com.br/recursos/c/dmairr/api/itens.html
     axios.get('http://faus.com.br/recursos/c/dmairr/api/itens.html')
           .then(itens => { 
             this.setState({ listaItens: itens.data });

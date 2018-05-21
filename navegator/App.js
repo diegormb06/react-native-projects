@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 
 import DetailsScreen from './src/components/details';
 import HomeScreen from './src/components/home';
+import ModalScreen from "./src/components/ModalScreen";
 
 export default class App extends React.Component {
   render() {
@@ -11,12 +12,40 @@ export default class App extends React.Component {
   }
 }
 
-const RootStack = createStackNavigator(
+const MainStack = createStackNavigator(
   {
-    Home: HomeScreen,
-    Details: DetailsScreen,
+    Home: {
+      screen: HomeScreen,
+    },
+    Details: {
+      screen: DetailsScreen,
+    },
   },
   {
     initialRouteName: 'Home',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      }
+    }
+  }
+);
+
+const RootStack = createStackNavigator(
+  {
+    Main: {
+      screen: MainStack,
+    },
+    MyModal: {
+      screen: ModalScreen,
+    },
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
   }
 );
