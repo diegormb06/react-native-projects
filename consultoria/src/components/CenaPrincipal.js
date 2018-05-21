@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  StatusBar
 } from 'react-native';
 
 import BarraNavegacao from "./barraNavegacao";
@@ -25,11 +26,11 @@ export default class CenaPrincipal extends Component {
           <Image source={logoAtm} />
         </View>
 
-        <View style={styles.buttons}>
-          <Image source={buttonClient} />
-          <Image source={buttonContato} />
-          <Image source={buttonInfo} />
-          <Image source={buttonServices} />
+        <View style={styles.buttonsContainer}>
+          <Image style={styles.button} source={buttonClient} />
+          <Image style={styles.button} source={buttonContato} />
+          <Image style={styles.button} source={buttonInfo} />
+          <Image style={styles.button} source={buttonServices} />
         </View>
       </View>
     );
@@ -38,13 +39,16 @@ export default class CenaPrincipal extends Component {
 
 const styles = StyleSheet.create({
   logo: {
-    padding: 20,
+    paddingTop: 20,
     alignItems: 'center'
   },
-  buttons: {
-    padding: 30,
+  buttonsContainer: {
+    paddingHorizontal: 30,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    flex: 1
+    justifyContent: 'center',
+    flexWrap: 'wrap'
+  },
+  button: {
+    margin: 17
   }
 })

@@ -17,8 +17,8 @@ export default class BarraNavegacao extends Component {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#ccc',
     textAlign: 'center',
+    backgroundColor: '#ccc',
     padding: 20,
     fontSize: 16
   }

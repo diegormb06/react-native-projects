@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
-import { CenaPrincipal } from "./src/components/CenaPrincipal";
+import CenaClientes from './src/components/CenaClientes';
 
 export default class App extends Component {
   render() {
     return (
-      <CenaPrincipal />
+      <CenaClientes />
     )
   }
 }
-
