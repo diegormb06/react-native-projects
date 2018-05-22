@@ -4,7 +4,8 @@ import {
   Text,
   View,
   Image,
-  StatusBar
+  StatusBar,
+  TouchableOpacity
 } from 'react-native';
 
 import BarraNavegacao from "./barraNavegacao";
@@ -27,10 +28,18 @@ export default class CenaPrincipal extends Component {
         </View>
 
         <View style={styles.buttonsContainer}>
-          <Image style={styles.button} source={buttonClient} />
-          <Image style={styles.button} source={buttonContato} />
-          <Image style={styles.button} source={buttonInfo} />
-          <Image style={styles.button} source={buttonServices} />
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Cliente')} >
+            <Image style={styles.button} source={buttonClient} />
+          </TouchableOpacity>  
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Contato')} >
+            <Image style={styles.button} source={buttonContato} />
+          </TouchableOpacity>  
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Empresa')} >
+            <Image style={styles.button} source={buttonInfo} />
+          </TouchableOpacity>  
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Servicos')} >
+            <Image style={styles.button} source={buttonServices} />
+          </TouchableOpacity>  
         </View>
       </View>
     );

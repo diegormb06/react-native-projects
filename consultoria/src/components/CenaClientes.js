@@ -12,13 +12,16 @@ import BarraNavegacao from "./barraNavegacao";
 const iconClientes = require('../img/detalhe_cliente.png');
 const cliente1 = require('../img/cliente1.png');
 const cliente2 = require('../img/cliente2.png');
+const backgroundColor = '#B9C941';
 
 export default class CenaClientes extends Component {
   render() {
+    const navigation = this.props.navigation;
+
     return (
       <View>
         <StatusBar backgroundColor='#ccc' />
-        <BarraNavegacao background='#B9C941' />
+        <BarraNavegacao navigation={navigation} backButton backgroundColor={backgroundColor} />
 
         <View style={styles.header}>
           <Image source={iconClientes} />
@@ -40,9 +43,6 @@ export default class CenaClientes extends Component {
 }
 
 const styles = StyleSheet.create({
-  barraNavegacao: {
-    backgroundColor: '#B9C941'
-  },
   header: {
     marginVertical: 15,
     flexDirection: 'row'
