@@ -7,22 +7,32 @@ import Comando from './Comando';
 export class Painel extends Component {
   constructor(props) {
     super(props);
-    this.state = { num1: '', num2: '' };
+    this.state = { num1: '', num2: '', operacao: '' };
     this.calcular = this.calcular.bind(this);
     this.atualizaValor = this.atualizaValor.bind(this);
+    this.mudaOperador = this.mudaOperador.bind(this);
   }
 
   calcular() {
-    const resultado = parseFloat(this.state.num1) + parseFloat(this.state.num2);
+    let resultado;
+    if (this.state.operacao === 'soma') {
+      resultado = parseFloat(this.state.num1) + parseFloat(this.state.num2);
+    } else {
+      resultado = parseFloat(this.state.num1) - parseFloat(this.state.num2);
+    }
+    
     console.log(resultado);
   }
 
   atualizaValor(nome, valor) {
-    if (nome === 'num1') {
-      return this.setState({ num1: valor });
-    }
+    const numeros = {};
+    numeros[nome] = valor;
+    this.setState(numeros);
+  }
 
-    this.setState({ num2: valor });
+  mudaOperador(operador) {
+    this.setState({ operacao: operador });
+    console.log(operador);
   }
 
   render() {
@@ -33,7 +43,10 @@ export class Painel extends Component {
           num2={this.state.num2} 
           atualizaValor={this.atualizaValor}
         />
-        <Operacao />
+        <Operacao 
+          operacao={this.state.operacao} 
+          operador={this.mudaOperador}
+        />
         <Comando acao={this.calcular} />
       </View>
     );
