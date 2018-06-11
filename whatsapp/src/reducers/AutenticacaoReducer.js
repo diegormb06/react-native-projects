@@ -2,7 +2,8 @@ const INITIAL_STATE = {
   nome: '',
   email: '',
   senha: '',
-  erroCadastro: ''
+  erroCadastro: '',
+  erroLogin: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -24,6 +25,12 @@ export default (state = INITIAL_STATE, action) => {
       if (action.payload == 'auth/weak-password') {
         return { ...state, erroCadastro: 'A senha precisa ter no mínimo 6 caracteres' }
       }
+
+    case 'cadastro_sucesso':
+      return { ...state, nome: '', senha: '' }
+
+    case 'login_erro':
+      return { ...state, erroLogin: action.payload}
 
     default:
       return state;
