@@ -1,3 +1,13 @@
+import {
+  MODIFICA_NOME,
+  MODIFICA_EMAIL,
+  MODIFICA_SENHA,
+  CADASTRO_SUCESSO,
+  ERRO_CADASTRO,
+  LOGIN_SUCESSO,
+  LOGIN_ERRO
+} from "../actions/types";
+
 const INITIAL_STATE = {
   nome: '',
   email: '',
@@ -9,16 +19,16 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   console.log(action);
   switch (action.type) {
-    case 'modifica_nome':
+    case MODIFICA_NOME:
       return { ...state, nome: action.payload }
 
-    case 'modifica_email':
+    case MODIFICA_EMAIL:
       return { ...state, email: action.payload }
 
-    case 'modifica_senha':
+    case MODIFICA_SENHA:
       return { ...state, senha: action.payload }
 
-    case 'erro_cadastro':
+    case ERRO_CADASTRO:
       if (action.payload == 'auth/email-already-in-use') {
         return { ...state, erroCadastro: 'O e-mail informado já está sendo utilizado' }
       }
@@ -26,10 +36,10 @@ export default (state = INITIAL_STATE, action) => {
         return { ...state, erroCadastro: 'A senha precisa ter no mínimo 6 caracteres' }
       }
 
-    case 'cadastro_sucesso':
+    case CADASTRO_SUCESSO:
       return { ...state, nome: '', senha: '' }
 
-    case 'login_erro':
+    case LOGIN_ERRO:
       return { ...state, erroLogin: action.payload}
 
     default:
