@@ -8,9 +8,10 @@ import {
   CADASTRO_SUCESSO, 
   ERRO_CADASTRO,
   LOGIN_SUCESSO, 
-  LOGIN_ERRO 
+  LOGIN_ERRO ,
+  LOADING_LOGIN,
+  LOADING_ATIVO
 } from "./types";
-
 
 export const modificaNome = (nome) => {
   return {
@@ -35,6 +36,8 @@ export const modificaSenha = (senha) => {
 
 export const cadastraUsuario = ({nome, email, senha}) => {
   return dispatch => {
+    dispatch({ type: LOADING_ATIVO });
+
     firebase.auth().createUserWithEmailAndPassword(email, senha)
       .then(user => {
         let emailb64 = b64.encode(email);
@@ -56,6 +59,8 @@ const cadastroUsuarioErro = (erro, dispatch) => {
 
 export const autenticaUsuario = ({email, senha}) => {
   return dispatch => {
+    dispatch({ type: LOADING_ATIVO })
+
     firebase.auth().signInWithEmailAndPassword(email, senha)
       .then(dados => loginUsuarioSucesso(dispatch))
       .catch(erro => loginUsuarioErro(erro, dispatch))
@@ -68,6 +73,5 @@ const loginUsuarioSucesso = (dispatch) => {
 }
 
 const loginUsuarioErro = (erro, dispatch) => {
-  console.log(erro);
   dispatch({ type: LOGIN_ERRO, payload: erro.message });
 }

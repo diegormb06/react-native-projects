@@ -9,10 +9,10 @@ import Principal from './components/Principal';
 export default () => (
   <Router navigationBarStyle={{backgroundColor:'#115E54'}} titleStyle={{color: '#fff'}} >
     <Stack key='root'>
-      <Scene key='login' component={FormLogin} initial title='Login' hideNavBar />
+      <Scene key='login' component={FormLogin} title='Login' hideNavBar />
       <Scene key='cadastro' component={FormCadastro} title='Cadastro' />
       <Scene key='boasVindas' component={BoasVindas} title='Bem Vindo Primata!' hideNavBar/>
-      <Scene key='principal' component={Principal} title='Principal' hideNavBar/>
+      <Scene key='principal' component={Principal} initial title='Principal' hideNavBar/>
     </Stack>
   </Router>
 )
