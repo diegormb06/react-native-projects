@@ -8,8 +8,7 @@ import {
   CADASTRO_SUCESSO, 
   ERRO_CADASTRO,
   LOGIN_SUCESSO, 
-  LOGIN_ERRO ,
-  LOADING_LOGIN,
+  LOGIN_ERRO,
   LOADING_ATIVO
 } from "./types";
 

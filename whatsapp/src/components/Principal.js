@@ -6,7 +6,6 @@ import TabBarMenu from './TabBarMenu';
 import Conversas from './Conversas';
 import Contatos from './Contatos';
 
-
 export default class Principal extends Component {
   state = {
     index: 0,
