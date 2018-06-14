@@ -13,7 +13,7 @@ export default () => (
       <Scene key='login' component={FormLogin} title='Login' hideNavBar />
       <Scene key='cadastro' component={FormCadastro} title='Cadastro' />
       <Scene key='boasVindas' component={BoasVindas} title='Bem Vindo Primata!' hideNavBar/>
-      <Scene key='principal' component={Principal} initial title='Principal' hideNavBar/>
+      <Scene key='principal' component={Principal} title='Principal' hideNavBar/>
       <Scene key='adicionarContato' component={AdicionarContato} title='Adicionar Contato'/>
     </Stack>
   </Router>
