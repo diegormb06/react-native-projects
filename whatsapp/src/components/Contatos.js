@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { connect } from "react-redux";
 import { contatosUsuarioFetch } from "../actions/AppActions";
+import _ from 'lodash';
 
 class Contatos extends Component {
 
@@ -10,6 +11,7 @@ class Contatos extends Component {
   }
 
   render() {
+    console.log(this.props.lista_contatos);
     return(
       <View>
         <Text>Contatos</Text>
@@ -18,7 +20,10 @@ class Contatos extends Component {
   }
 }
 
-const mapStateToProps = {
+const mapStateToProps = state => (
+  {
+    lista_contatos: state.ListaContatosReducer.lista_contatos
+  }
+)
 
-}
-export default connect(null, { contatosUsuarioFetch })(Contatos)
+export default connect(mapStateToProps, { contatosUsuarioFetch })(Contatos)

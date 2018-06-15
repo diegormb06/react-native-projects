@@ -53,7 +53,6 @@ export const contatosUsuarioFetch = () => {
 
     firebase.database().ref(`usuarios/${currentUserB64}/contatos/`)
     .on('value', snapshot => {
-      console.log(snapshot.val());
       dispatch({type: LISTA_CONTATO_USUARIO, payload: snapshot.val()})
     })
   }
