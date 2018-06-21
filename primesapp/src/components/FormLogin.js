@@ -4,8 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { 
   modificaEmail, 
   modificaSenha, 
-  autenticaUsuario, 
-  loadingLogin 
+  autenticaUsuario,
 } from '../actions/AutenticacaoAction';
 
 import {

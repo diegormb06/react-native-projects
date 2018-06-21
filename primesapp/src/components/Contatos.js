@@ -9,15 +9,22 @@ class Contatos extends Component {
 
   componentWillMount() {
     this.props.contatosUsuarioFetch();
+    this.listaContatos = this.props.contatos;
   }
 
   componentWillReceiveProps(nextProps) {
     this.listaContatos = nextProps.contatos;
-  } 
+  }
 
   renderListItem(contato) {
+    let parametrosConversa = {
+      title: contato.nome,
+      contatoNome: contato.nome,
+      contatoEmail: contato.email
+    }
+    debugger
     return (
-      <TouchableHighlight onPress={() => Actions.conversa()} >
+      <TouchableHighlight onPress={() => Actions.conversa(parametrosConversa)} >
         <View style={styles.listItem}>
           <Text style={styles.contatoNome}>{contato.nome}</Text>
           <Text style={styles.contatoEmail}>{contato.email}</Text>
@@ -25,7 +32,7 @@ class Contatos extends Component {
       </TouchableHighlight>
     )
   }
-  
+
   render() {
     return(
       <View>
