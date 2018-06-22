@@ -8,7 +8,8 @@ import {
   LIMPAR_CADASTRO_CONTATO,
   LISTA_CONTATO_USUARIO,
   MODIFICA_MENSAGEM,
-  LISTA_CONVERSA_USUARIO
+  LISTA_CONVERSA_USUARIO,
+  LIMPA_INPUT_MENSAGEM
 } from "../actions/types";
 
 export const inserirContato = email => {
@@ -53,7 +54,7 @@ export const contatosUsuarioFetch = () => {
   return dispatch =>{
     let currentUserB64 = b64.encode(currentUser.email);
 
-    firebase.database().ref(`usuarios/${currentUserB64}/contatos/`)
+    firebase.database().ref(`usuarios/${currentUserB64}/contatos`)
     .on('value', snapshot => {
       dispatch({type: LISTA_CONTATO_USUARIO, payload: snapshot.val()})
     })
@@ -78,13 +79,14 @@ export const enviaMensagem = (dadosConversa) => {
   .once('value').then(snapshot => {
     nomeUsuario = snapshot.val().nome;
   });
+  console.log(contatoEmail, contatoNome);
   return dispatch => {
     database.ref(`usuarios/${user64}/contatos/${contato64}/mensagens`)
     .push({mensagem, tipo: 'e'})
     .then( () => {
       database.ref(`usuarios/${contato64}/contatos/${user64}/mensagens`)
       .push({mensagem, tipo: 'r'})
-      .then( () => dispatch ({ type: 'xyz' }))
+      .then( () => dispatch ({ type: LIMPA_INPUT_MENSAGEM }))
     })
     .then(() => {
       database.ref(`usuarios/${user64}/conversas/${contato64}`)

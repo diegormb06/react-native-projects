@@ -3,7 +3,8 @@ import {
   ERRO_ADICIONAR_CONTATO, 
   ADICIONAR_CONTATO,
   LIMPAR_CADASTRO_CONTATO,
-  MODIFICA_MENSAGEM
+  MODIFICA_MENSAGEM,
+  LIMPA_INPUT_MENSAGEM
 } from "../actions/types";
 
 const INITIAL_STATE ={
@@ -25,6 +26,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, contato_adicionado: false }
     case MODIFICA_MENSAGEM:
       return { ...state, mensagem: action.payload }
+    case LIMPA_INPUT_MENSAGEM:
+      return { ...state, mensagem: '' }
   
     default:
       return state

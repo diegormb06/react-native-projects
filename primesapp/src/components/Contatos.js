@@ -22,7 +22,6 @@ class Contatos extends Component {
       contatoNome: contato.nome,
       contatoEmail: contato.email
     }
-    debugger
     return (
       <TouchableHighlight onPress={() => Actions.conversa(parametrosConversa)} >
         <View style={styles.listItem}>
