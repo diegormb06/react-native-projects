@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import { Actions } from "react-native-router-flux";
 import b64 from "base-64";
 import {
   INSERIR_CONTATO_EMAIL,
@@ -108,6 +107,18 @@ export const conversaUsuarioFetch = contatoEmail => {
     firebase.database().ref(`usuarios/${usuarioEmailb64}/contatos/${contatoEmailb64}/mensagens`)
     .on('value', snapshot => {
       dispatch ({type: LISTA_CONVERSA_USUARIO, payload: snapshot.val()})
+    })
+  }
+}
+
+export const conversasUsuarioFetch = () => {
+  const { currentUser } = firebase.auth();
+  const usuariob64 = b64.encode(currentUser.email);
+
+  return dispatch => {
+    firebase.database().ref(`usuarios/${usuariob64}/conversas`)
+    .once('value', snapshot => {
+      dispatch ({type: LISTA_CONVERSAS, payload: snapshot.val()})
     })
   }
 }
