@@ -44,7 +44,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, erroLogin: action.payload, loadingBtnActive: false}
 
     case LOGIN_SUCESSO:
-      return { ...state, loadingBtnActive: false}
+      return { ...state, loadingBtnActive: false, email: '', senha: '' }
 
     case LOADING_ATIVO:
       return { ...state, loadingBtnActive: true}

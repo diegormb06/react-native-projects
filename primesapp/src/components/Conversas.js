@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, StyleSheet, TouchableHighlight } from "react-native";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { conversasUsuarioFetch } from "../actions/AppActions";
+import { Actions } from "react-native-router-flux";
 
 class Conversas extends Component {
 
@@ -16,11 +17,18 @@ class Conversas extends Component {
   }
 
   renderConversas(conversas) {
+    let parametrosConversa = {
+      title: conversas.nome,
+      contatoNome: conversas.nome,
+      contatoEmail: conversas.email
+    }
     return (
-      <View>
-        <Text>conversas.nome</Text>
-        <Text>conversas.email</Text>
-      </View>
+      <TouchableHighlight onPress={() => Actions.conversa(parametrosConversa)} >
+        <View style={styles.listItem}>
+          <Text style={styles.contatoNome}>{conversas.nome}</Text>
+          <Text style={styles.contatoMensagem}>{conversas.mensagem}</Text>
+        </View>
+      </TouchableHighlight>
     )
   }
 
@@ -35,6 +43,17 @@ class Conversas extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  listItem: {
+    flex: 1,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#CCC'
+  },
+  contatoNome: { fontSize: 25, color: '#383838' },
+  contatoMensagem: { fontSize: 15 }
+})
 
 const mapStateToProps = state => {
   const conversas = _.map(state.ListaConversasReducer, (val, uid) => {

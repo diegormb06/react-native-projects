@@ -51,9 +51,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1, 
     borderBottomColor: '#CCC' 
   },
-  contatoImg: {
-    marginRight: 20
-  },
   contatoNome: { fontSize: 25 },
   contatoEmail: { fontSize: 15 }
 })
