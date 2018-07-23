@@ -11,7 +11,6 @@ import { View,
   TouchableOpacity
 } from "react-native";
 
-
 const addUserImg = require('../img/adicionar-contato.png')
 
 deslogar = () => {
