@@ -1,5 +1,13 @@
 import React from 'react';
-import { View, StyleSheet, TextInput, Button } from 'react-native';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  TextInput, 
+  Button, 
+  ActivityIndicator,
+  Alert
+} from 'react-native';
 import firebase from "firebase";
 import FormRow from '../components/FormRow';
 
@@ -7,7 +15,7 @@ export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { login: '', password: '', isLoading: false };
+    this.state = { login: '', password: '', isLoading: false, message: '' };
   }
 
   componentDidMount() {
@@ -25,14 +33,38 @@ export default class Login extends React.Component {
   tryLogin() {
     this.setState({isLoading: true});
     const { login, password } = this.state;
+    
     firebase.auth().signInWithEmailAndPassword(login, password)
       .then(response => {
-        console.log('logado com sucesso');
+        this.setState({ message: 'logado com sucesso' });
+        this.props.navigation.navigate('ListaSeries')
       })
       .catch(error => {
-        console.log(error);
+        if ( error.code === 'auth/user-not-found' ) {
+          Alert.alert(
+            'Usuário não cadastrado', 
+            'Deseja cadastrar novo usuário?',
+            [
+              { text: 'não' },
+              { text: 'Sim', onPress: () => this.addNewUser(login, password) }
+            ],
+            { cancelable: false }
+          );
+        }
+
+        this.setState({ message: error.message })
       })
       .then(() => this.setState({isLoading: false}))
+  }
+
+  addNewUser(login, password) {
+    firebase.auth().createUserWithEmailAndPassword(login, password)
+    .then(user => {
+      this.setState({ message: 'Usuário criado com sucesso!' })
+    })
+    .catch(error => {
+      this.setState({ message: error.message })
+    })
   }
 
   renderButtonLogin() {
@@ -62,6 +94,7 @@ export default class Login extends React.Component {
             secureTextEntry
           />
         </FormRow>
+        <Text>{this.state.message}</Text>
         { this.renderButtonLogin() }
       </View>
     )
