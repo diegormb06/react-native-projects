@@ -9,13 +9,15 @@ import {
   Alert
 } from 'react-native';
 import firebase from "firebase";
+import { connect } from "react-redux";
+import { loginUserSuccess } from "../actions";
 import FormRow from '../components/FormRow';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { login: '', password: '', isLoading: false, message: '' };
+    this.state = { email: '', password: '', isLoading: false, message: '' };
   }
 
   componentDidMount() {
@@ -30,48 +32,47 @@ export default class Login extends React.Component {
     firebase.initializeApp(config);
   }
 
-  tryLogin() {
-    this.setState({isLoading: true});
-    const { login, password } = this.state;
-    
-    firebase.auth().signInWithEmailAndPassword(login, password)
+  userLogin() {
+    this.setState({ isLoading: true });
+    const { email, password } = this.state;
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
       .then(response => {
-        this.setState({ message: 'logado com sucesso' });
-        this.props.navigation.navigate('ListaSeries')
+        this.setState({ message: 'logado com sucesso', isLoading: false });
+        this.props.loginUserSuccess(response);
+        this.props.navigation.replace('ListaSeries')
       })
       .catch(error => {
-        if ( error.code === 'auth/user-not-found' ) {
+        if (error.code === 'auth/user-not-found') {
           Alert.alert(
-            'Usuário não cadastrado', 
+            'Usuário não cadastrado',
             'Deseja cadastrar novo usuário?',
             [
-              { text: 'não' },
-              { text: 'Sim', onPress: () => this.addNewUser(login, password) }
+              { text: 'não', onPress: () => this.setState({ message: '', isLoading: false }) },
+              { text: 'Sim', onPress: () => this.addNewUser(email, password) }
             ],
             { cancelable: false }
           );
         }
-
         this.setState({ message: error.message })
       })
-      .then(() => this.setState({isLoading: false}))
   }
 
-  addNewUser(login, password) {
-    firebase.auth().createUserWithEmailAndPassword(login, password)
-    .then(user => {
-      this.setState({ message: 'Usuário criado com sucesso!' })
-    })
-    .catch(error => {
-      this.setState({ message: error.message })
-    })
+  addNewUser(email, password) {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        this.setState({ message: 'Usuário criado com sucesso!' })
+      })
+      .catch(error => {
+        this.setState({ message: error.message })
+      })
   }
 
   renderButtonLogin() {
     if (this.state.isLoading)
       return <ActivityIndicator size='large' />
 
-    return <Button title='Log in' onPress={() => this.tryLogin()} />
+    return <Button title='Log in' onPress={() => this.userLogin()} />
   }
 
   render() {
@@ -81,8 +82,8 @@ export default class Login extends React.Component {
           <TextInput
             placeholder='Email'
             style={styles.input}
-            value={this.state.login}
-            onChangeText={login => this.setState({ login })}
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
           />
         </FormRow>
         <FormRow>
@@ -107,3 +108,5 @@ const styles = StyleSheet.create({
     fontSize: 16
   }
 })
+
+export default connect(null, { loginUserSuccess })(Login)
