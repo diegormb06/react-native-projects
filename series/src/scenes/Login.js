@@ -38,8 +38,6 @@ class Login extends React.Component {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(response => {
-        this.setState({ message: 'logado com sucesso', isLoading: false });
-        this.props.loginUserSuccess(response);
         this.props.navigation.replace('ListaSeries')
       })
       .catch(error => {

@@ -79,7 +79,7 @@ export const enviaMensagem = (dadosConversa) => {
   .once('value').then(snapshot => {
     nomeUsuario = snapshot.val().nome;
   });
-  console.log(contatoEmail, contatoNome);
+  
   return dispatch => {
     database.ref(`usuarios/${user64}/contatos/${contato64}/mensagens`)
     .push({mensagem, tipo: 'e'})

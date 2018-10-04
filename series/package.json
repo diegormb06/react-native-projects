@@ -21,8 +21,11 @@
   "dependencies": {
     "expo": "^27.0.1",
     "firebase": "^5.3.0",
+    "lodash": "^4.17.11",
     "react": "16.3.1",
     "react-native": "~0.55.2",
+    "react-native-linear-gradient": "^2.4.2",
+    "react-native-shimmer-placeholder": "git+https://github.com/tomzaku/react-native-shimmer-placeholder.git#expo",
     "react-navigation": "^2.9.3",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
