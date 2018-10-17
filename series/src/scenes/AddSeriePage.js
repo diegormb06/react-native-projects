@@ -45,7 +45,7 @@ class AddSeriePage extends Component {
 
     return <Button title='Adicionar' onPress={() => this.saveSerie()} />
   }
-  
+
   render() {
     const { title, img, gender, rate, description } = this.props.serieForm;
     return (
@@ -91,7 +91,7 @@ class AddSeriePage extends Component {
                 step={5}/>
             </View>
           </FormRow>
-          
+
           <FormRow>
             <TextInput style={styles.input} multiline
               numberOfLines={4}

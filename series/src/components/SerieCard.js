@@ -15,8 +15,8 @@ const SerieCard = ({ serie, index, onNavigate, visible }) => (
     style={[styles.container, index % 2 === 0 ? styles.cardLeft : styles.cardRight ]}
   >
     <View style={styles.card}>
-      <Shimmer autoRun visible={false} style={styles.shimmerPlaceholder}>
-        <Image source={{ uri: serie.img }} aspectRatio={1} resizeMode='stretch' />
+      <Shimmer autoRun visible={visible} style={styles.shimmerPlaceholder}>
+        <Image source={{ uri: serie.img }} aspectRatio={1} style={styles.cardImg} />
       </Shimmer>
       <Shimmer autoRun visible={visible} style={styles.shimmerPlaceholder}>
         <View style={styles.cardTitleWrapper}>
@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ddd',
     height: Dimensions.get('window').width / 2
+  },
+  cardImg: {
+    height: '100%'
   },
   cardTitleWrapper: {
     backgroundColor: 'black',

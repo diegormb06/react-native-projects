@@ -9,19 +9,17 @@ import _ from 'lodash'
 export default class ListaSeries extends React.Component {
 
   state = {
-    visible: false,
+    visible: true,
     series: seriesMock
   }
 
   componentWillMount() {
-    // console.log(seriesMock)
-    // const { currentUser } = firebase.auth()
-    // firebase.database().ref(`users/${currentUser.uid}/series`)
-    // .once('value').then((snapshot) => {
-    //   const newSeries = _.map(snapshot.val(), (val, uid) => { return { ...val, uid } })
-    //   console.log(newSeries)
-    //   this.setState({ series: newSeries });
-    // })
+    const { currentUser } = firebase.auth()
+    firebase.database().ref(`users/${currentUser.uid}/series`)
+    .once('value').then((snapshot) => {
+      const newSeries = _.map(snapshot.val(), (val, uid) => { return { ...val, uid } })
+      this.setState({ series: newSeries });
+    })
   }
 
   renderSerieCard(item, index) {
