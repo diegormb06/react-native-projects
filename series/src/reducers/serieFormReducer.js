@@ -1,4 +1,4 @@
-import { SET_FIELD, SAVE_SERIE } from '../actions'
+import { SET_FIELD, SAVE_SERIE, EDIT_SERIE } from '../actions'
 
 const INITIAL_STATE = {
   id: null,
@@ -18,6 +18,9 @@ export default (state = INITIAL_STATE, action) => {
 
     case SAVE_SERIE:
       return INITIAL_STATE
+
+    case EDIT_SERIE:
+      return {...action.serie}
 
     default:
       return state;

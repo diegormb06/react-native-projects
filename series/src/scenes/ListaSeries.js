@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
-import seriesMock from "../../series.json";
+import { View, FlatList, ActivityIndicator } from 'react-native';
 import SerieCard from '../components/SerieCard';
 import AddSerieCard from '../components/AddSerieCard';
 import firebase from 'firebase'
@@ -10,13 +9,13 @@ export default class ListaSeries extends React.Component {
 
   state = {
     visible: true,
-    series: seriesMock
+    series: null
   }
 
   componentWillMount() {
     const { currentUser } = firebase.auth()
     firebase.database().ref(`users/${currentUser.uid}/series`)
-    .once('value').then((snapshot) => {
+    .on('value', (snapshot) => {
       const newSeries = _.map(snapshot.val(), (val, uid) => { return { ...val, uid } })
       this.setState({ series: newSeries });
     })
@@ -37,6 +36,9 @@ export default class ListaSeries extends React.Component {
   }
 
   render() {
+    if ( !this.state.series ) 
+      return <ActivityIndicator />
+
     return (
       <View style={{paddingVertical: 10}}>
         <FlatList

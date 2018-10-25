@@ -18,3 +18,9 @@ export const saveSerie = serie => {
     })
   }
 }
+
+export const EDIT_SERIE = 'EDIT_SERIE'
+export const editSerie = (serie) => ({
+  type: EDIT_SERIE,
+  serie
+})

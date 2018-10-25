@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import { 
   View, 
   Text, 
@@ -11,19 +11,21 @@ import {
   KeyboardAvoidingView,
   ActivityIndicator,
   Alert
-} from "react-native";
-import FormRow from '../components/FormRow';
-import { connect } from "react-redux";
-import { setField, saveSerie } from '../actions';
-import firebase from 'firebase'
-import seriesMock from '../../series.json';
+} from "react-native"
+import FormRow from '../components/FormRow'
+import { connect } from "react-redux"
+import { setField, saveSerie, editSerie } from '../actions'
 
 class AddSeriePage extends Component {
 
   state = { isLoading: false }
 
   componentWillMount() {
-    this.setState({ isLoading: false })
+    if (this.props.navigation.state.params) {
+      const { serie } = this.props.navigation.state.params
+      this.props.editSerie(serie)
+      this.setState({ isLoading: false })
+    }
   }
 
   async saveSerie() {
@@ -124,4 +126,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { setField, saveSerie })(AddSeriePage);
+export default connect(
+  mapStateToProps, 
+  { setField, saveSerie, editSerie }
+)(AddSeriePage);
