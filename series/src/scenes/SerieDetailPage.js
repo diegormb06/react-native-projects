@@ -6,7 +6,7 @@ import LongText from "../components/LongText";
 export default class  extends Component {
 
   editSerie(serie) {
-    this.props.navigation.navigate('AddSeriePage', { serie })
+    this.props.navigation.replace('AddSeriePage', { serie })
   }
 
   render() {

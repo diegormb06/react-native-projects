@@ -7,10 +7,24 @@ export const setField = (field, value) => ({
   value
 })
 
+export const CLEAR_FIELD = 'CLEAR_FIELD'
+export const clearField = () => ({
+  type: CLEAR_FIELD
+})
+
 export const SAVE_SERIE = 'SAVE_SERIE'
 export const saveSerie = serie => {
   const { currentUser } = firebase.auth()
-
+  if (serie.id) {
+    console.log(serie)
+    return async dispatch => {
+      return await firebase.database().ref(`/users/${currentUser.uid}/series/${serie.id}`)
+        .set(serie).then(() => {
+          console.log('set serie')
+          dispatch({ type: SAVE_SERIE })
+        })
+    }
+  }
   return async dispatch => {
     return await firebase.database().ref(`/users/${currentUser.uid}/series`)
     .push(serie).then(() => {

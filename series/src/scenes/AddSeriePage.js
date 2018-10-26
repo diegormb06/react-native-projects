@@ -14,7 +14,7 @@ import {
 } from "react-native"
 import FormRow from '../components/FormRow'
 import { connect } from "react-redux"
-import { setField, saveSerie, editSerie } from '../actions'
+import { setField, saveSerie, editSerie, clearField } from '../actions'
 
 class AddSeriePage extends Component {
 
@@ -23,16 +23,20 @@ class AddSeriePage extends Component {
   componentWillMount() {
     if (this.props.navigation.state.params) {
       const { serie } = this.props.navigation.state.params
+      console.log(serie)
       this.props.editSerie(serie)
       this.setState({ isLoading: false })
+    } else {
+      this.props.clearField()
     }
   }
 
   async saveSerie() {
     this.setState({ isLoading: true })
     try {
+      console.log(this.props.serieForm)
       await this.props.saveSerie(this.props.serieForm)
-      this.props.navigation.goBack()
+      this.props.navigation.navigate('ListaSeries')
     } catch (error) {
       Alert.alert('Erro!', 
       'Não foi possível salvar a série nesse momento. Tente novamente')
@@ -128,5 +132,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps, 
-  { setField, saveSerie, editSerie }
+  { setField, saveSerie, editSerie, clearField }
 )(AddSeriePage);

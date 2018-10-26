@@ -16,7 +16,7 @@ export default class ListaSeries extends React.Component {
     const { currentUser } = firebase.auth()
     firebase.database().ref(`users/${currentUser.uid}/series`)
     .on('value', (snapshot) => {
-      const newSeries = _.map(snapshot.val(), (val, uid) => { return { ...val, uid } })
+      const newSeries = _.map(snapshot.val(), (val, uid) => { return { ...val, id: uid } })
       this.setState({ series: newSeries });
     })
   }
