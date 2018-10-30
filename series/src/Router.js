@@ -17,8 +17,11 @@ const Router = createStackNavigator(
     },
     AddSeriePage: {
       screen: AddSeriePage,
-      navigationOptions: {
-        title: 'Cadastrar nova série'
+      navigationOptions: ({ navigation }) => {
+        if (navigation.state.params && navigation.state.params.serie) {
+          return { title: navigation.state.params.serie.title}
+        }
+        return {title: 'Cadastrar nova série'}
       }
     },
   },

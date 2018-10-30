@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import { Alert } from 'react-native'
 
 export const SET_FIELD = 'SET_FIELD'
 export const setField = (field, value) => ({
@@ -38,3 +39,35 @@ export const editSerie = (serie) => ({
   type: EDIT_SERIE,
   serie
 })
+
+export const DELETE_SERIE = 'DELETE_SERIE'
+export const deleteSerie = (serie) => {
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      Alert.alert(
+        'Deletar',
+        `Deseja deletar a série ${serie.title}?`,
+        [{
+          'text': 'Não',
+          onPress: () => {resolve(false)},
+          'style': 'cancel'
+        },{
+          'text': 'Sim',
+            onPress: () => { removeSerieData(serie, resolve, reject) }
+        }],
+        { cancelable: false }
+      )
+    })
+  }
+}
+
+const removeSerieData = async (serie, resolve, reject) => {
+  const { currentUser } = firebase.auth()
+  try {
+    await firebase.database().ref(`/users/${currentUser.uid}/series/${serie.id}`)
+          .remove();
+    resolve(true);
+  } catch (error) {
+      reject(error)
+  }
+}
